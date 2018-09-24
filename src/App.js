@@ -1,23 +1,68 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './App.css';
 
-const Item = () => (
-  <div className="item">{ this.props.children }</div>
+const Item = ({ template, id, ...props }) => (
+  <button
+    { ...props }
+    title={ id }
+    className="item">{ template }</button>
 );
 
 class App extends Component {
+
+  // could be fetched from backend
+  snippets = [
+      {
+         id: 'thank you',
+         template: 'Hello,\n Thank you for your reply.\nBest regards, John Doe',
+      },
+      {
+        id: 'welcome',
+        template: 'Hello,\n Welcome to  for your reply.\nBest regards, John Doe'
+      },
+      {
+        id: 'lead',
+        template: 'Hello,\n Let me introduce to you our company.'
+      },
+      {
+        id: 'thank you',
+        template: 'Hello,\n Thank you for your reply.\nBest regards, John Doe',
+     },
+     {
+       id: 'welcome',
+       template: 'Hello,\n Welcome to  for your reply.\nBest regards, John Doe'
+     },
+     {
+       id: 'lead',
+       template: 'Hello,\n Let me introduce to you our company.'
+     },
+  ];
+
   render() {
     return (
-      <main className="app">
+      <Fragment>
         <header>
-          <h1 className="title">Gmail Snippets</h1>
+            <h1 className="title">Email Snippets</h1>
         </header>
-        <ul className="list">
-          <Item>template 1</Item>
-          <Item>template 2</Item>
-        </ul>
-      </main>
+        <main className="main">
+          <ul className="list">
+            {
+              this.snippets.map((snippet, index) => (
+                <Item
+                  onClick={ () => this.handleOnClick(snippet) }
+                  key={ index }
+                  id={ snippet.id }
+                  template={ snippet.template } />
+              ))
+            }
+          </ul>
+        </main>
+      </Fragment>
     );
+  }
+
+  handleOnClick = (snippet) => {
+    window.parent.postMessage(snippet, '*');
   }
 }
 
