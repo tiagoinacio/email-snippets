@@ -1,42 +1,10 @@
 import React, { Component, Fragment } from 'react';
+import Item from './components/item';
+// could be fetched from backend
+import { snippets } from './utils';
 import './App.css';
 
-const Item = ({ template, id, ...props }) => (
-  <button
-    { ...props }
-    title={ id }
-    className="item">{ template }</button>
-);
-
 class App extends Component {
-
-  // could be fetched from backend
-  snippets = [
-      {
-         id: 'thank you',
-         template: 'Hello,\n Thank you for your reply.\nBest regards, John Doe',
-      },
-      {
-        id: 'welcome',
-        template: 'Hello,\n Welcome to  for your reply.\nBest regards, John Doe'
-      },
-      {
-        id: 'lead',
-        template: 'Hello,\n Let me introduce to you our company.'
-      },
-      {
-        id: 'thank you',
-        template: 'Hello,\n Thank you for your reply.\nBest regards, John Doe',
-     },
-     {
-       id: 'welcome',
-       template: 'Hello,\n Welcome to  for your reply.\nBest regards, John Doe'
-     },
-     {
-       id: 'lead',
-       template: 'Hello,\n Let me introduce to you our company.'
-     },
-  ];
 
   render() {
     return (
@@ -47,7 +15,7 @@ class App extends Component {
         <main className="main">
           <ul className="list">
             {
-              this.snippets.map((snippet, index) => (
+              snippets.map((snippet, index) => (
                 <Item
                   onClick={ () => this.handleOnClick(snippet) }
                   key={ index }

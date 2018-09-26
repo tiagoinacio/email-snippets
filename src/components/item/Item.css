@@ -1,0 +1,9 @@
+.item {
+    border: 1px solid silver;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    cursor: pointer;
+    text-align: left;
+    color: #2f4f4f;
+}
